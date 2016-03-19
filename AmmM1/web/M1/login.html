@@ -6,6 +6,7 @@
         <meta charset="UTF-8">
         <meta name="author" content="StefanoCorda">
         <meta name="keywords" content="TCGpoetto, login">
+        <meta name="description" content="Pagina per effettuare il log in">
     </head>
     
     
@@ -13,21 +14,21 @@
     
       <header>
         <h1> Pagina di autenticazione </h1>
-        <br/>
       </header>
         
-        
-        <form>
+     
+        <form  method="GET">  <!-- Non inserisco il campo action perché non saprei che farci per ora -->
             <label for="username">Nome utente</label>
-            <input type="text" name="usr" id="username"> <br/>
+            <input type="text" name="usr" id="username"> 
+            
             <label for="password"> Password </label>
-            <input type="password" name="psw" id="password"> <br/>
+            <input type="password" name="psw" id="password">
    
            <button type="submit"> Accedi </button>
+           <button type="reset"> Reset </button>
         </form> 
-         
+      
         
-        <hr/>
         <nav>
             <h2> Sezione di navigazione</h2>
                <ul>
