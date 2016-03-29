@@ -1,0 +1,102 @@
+/* In questo file .css definisco tutti gli elementi che devono avere
+ * lo stesso stile in tutto il sito web */
+
+
+
+/*Logo fatto con la mia copia di illustrator PERFETTAMENTE legale*/
+body::before{
+	content: url("Logo.png"); 
+	margin: auto;
+}
+
+body {
+  background-image: url("pattern.jpg");
+  color:black;
+  background-color: #E1E5FF;
+  font-family: sans-serif;
+
+ /*Definisco le dimensioni per il box del body e lo centtro*/
+  width: 50%;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 30px;
+  border-color: darkcyan;
+  border-color: black;
+  padding: 1%;
+  margin: 2% auto 2% auto;
+}
+
+
+h1 {
+  font-size: 1.25em;
+  color: #1D8E89;
+
+  font-style:normal;
+  text-transform: uppercase;
+  text-shadow: -2px 2px  #FFFFFF;
+  text-align: right;
+}
+
+/*Definisco gli stili per i link*/
+a:link, a:visited{
+	color: #2f4141;
+}
+
+a:hover{
+	font-weight: bold;
+}
+
+/*centro la tabella rispetto al box in cui risiede*/
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*Definisco gli stili per gli elemento della tabella*/
+ table  td {
+
+	text-align: center;
+	padding: 5px;
+	
+	/*proprietà dei bordi*/
+	border-width: 1px;
+	border-style: solid;
+	border-color: darkcyan;	
+
+	/*Minima e massima grandezza di ogni cella della tabella*/
+	min-width: 150px;
+	max-width: 150px;
+}
+
+/*coloro gli elementi della tabella differentemente se sono pari o dispari*/ 
+tr:nth-child(odd) {
+	background: #c7eae7;
+	}
+tr:nth-child(even) {
+	background-color: #E1E5FF;
+}
+
+/*Definisco lo stile per l'intestazione della tabella*/
+table th{
+ border-width: 2px;
+ border-style:solid;
+ border-color: black ;
+ border-collapse: collapse;
+
+ background-color: darkcyan;
+ padding:10px;
+}
+
+input, textarea{
+	 color: #0086b3;
+	 background-color: #f2f2f2;
+
+	 border: 1px;
+	 border-color: #4d4d4d;
+	 border-style: solid;
+
+	 padding: 5px 5px 5px 10px; 
+	 display: block;
+	 margin-bottom: 2em;
+}
+

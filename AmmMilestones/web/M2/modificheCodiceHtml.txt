@@ -1,0 +1,2 @@
+file cliente.html:
+  Ho cambiato il codice della tabella (totalmente)
