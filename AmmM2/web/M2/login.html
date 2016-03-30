@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>LOG IN</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="StefanoCorda">
+        <meta name="keywords" content="TCGpoetto, login">
+        <meta name="description" content="Pagina per effettuare il log in">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    
+    
+    <body>
+
+    <nav id="navbar">
+      <ul>
+          <li> <a href="login.html">  Log in </a> </li>
+            <li> <a href="descrizione.html"> Home </a> </li>
+            <li> <a href="cliente.html"> cliente </a> </li>
+            <li> <a href="venditore.html"> venditore </a> </li>  
+
+        </ul>
+     </nav>
+     
+      <div id=page>
+
+         <header>
+           <img id="Logo" title="Logo" alt="Logo" src="Images/Logo.png" width="130" height="126">
+           <h1> Pagina di autenticazione </h1>
+         </header>
+              
+         <div id=login>  
+          <form  method="GET">  <!-- Non inserisco il campo action perché non saprei che farci per ora -->
+            <label for="username"> Username  </label>
+            <input type="text" name="usr" id="username" placeholder="Nome utente o Email"> 
+             
+            <label for="password">Password </label>
+            <input type="password" name="psw" id="password" placeholder="Password">
+         
+            <button type="submit"> Accedi </button>
+          </form> 
+         </div> 
+            
+      
+      </div>
+    </body>
+</html>
