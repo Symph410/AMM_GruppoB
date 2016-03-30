@@ -1,0 +1,1 @@
+GitHub cancella le cartella vuote, e questo causa problemi con netbeans, quindi ho creato questo .txt 

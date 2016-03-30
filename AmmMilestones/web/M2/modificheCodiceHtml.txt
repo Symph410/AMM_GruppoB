@@ -1,2 +1,12 @@
-file cliente.html:
-  Ho cambiato il codice della tabella (totalmente)
+*.html:
+  Ho aggiunto a ogni pagina un div con id="page" che comprende tutto il body.
+
+cliente.html:
+  Ho cambiato il codice della tabella.
+
+login.html:
+  1)Ho aggiunto la sezione div="login" che contiene il form.
+  2)Ho cancellato il bottone per il reset dei campi perché per due campi un reset è un po' ridonandate...
+  3)Ho cancellato il testo del label dei campi di input per aggiungere un placeholder
+  
+ Non è propriamente html, ma ho anche aggiunto un file favicon.ico 
