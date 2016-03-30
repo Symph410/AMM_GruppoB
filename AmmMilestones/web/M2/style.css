@@ -13,9 +13,11 @@ body {
 /*nb: div#page contiene tutto il body*/
 div#page::before{
 	content: url("Images/Logo.png");  /*Logo (fatto con illustrator)*/
+
 }
 
 div#page{
+	background-color: #e6e6ff;
 /*Definisco le dimensioni per il box del body e lo centro*/
   width: 50%;
   margin: 2% auto 2% auto;
@@ -42,10 +44,12 @@ h1 {
 /*Definisco gli stili per i link*/
 a:link, a:visited{
 	color: #2f4141;
+	text-decoration: none;
 }
 
 a:hover{
 	font-weight: bold;
+	text-decoration:underline;
 }
 
 /*centro la tabella rispetto al box in cui risiede*/
@@ -98,7 +102,6 @@ input, textarea{
 
 	padding: 5px 10px 5px 10px; 
 	display: block;
-	margin-top: 2em;
 }
 
 /*proprietà del box di login*/
@@ -109,7 +112,7 @@ div#login {
 	
 	border-style: solid;
 	border-width: 1px;
-	border-color:black;
+	border-color:black;	
 }
 
 /*proprietà condivise tra gli elementi di input del box login*/
@@ -132,5 +135,6 @@ div#login button{
 	border-color:black;
 
 	margin-bottom: 2%;
+	border-radius: 20px;
 }
 
