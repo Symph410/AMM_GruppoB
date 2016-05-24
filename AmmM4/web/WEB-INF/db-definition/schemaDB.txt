@@ -1,0 +1,41 @@
+Entità
+
+VENDITORE
+    id
+    username
+    psw
+    Saldo
+
+ACQUIRENTE
+    id
+    user
+    psw
+    Saldo
+
+OBJECTSALE
+    id
+    name
+    url
+    quantity
+    description
+    price
+    category
+
+SALDO
+    id
+    conto
+
+
+Schema relazionale
+
+      SALDO -> ACQUIRENTI (E VENDITORI)
+  a) ∀ Saldo, quanti utenti (venditori e acquirenti)? UNO
+  b) ∀ utente(venditore o acquirente che sia), quanti saldi? UNO
+     Relazione: UNO A UNO.
+
+
+     OBJECTSALE-> VENDITORE
+  a) ∀ oggetto, quanti venditori? UNO (questo perché se un venditore diverso mettesse in vendita lo stesso oggetto,
+                                        vorrei che risultasse come un oggetto diverso.. Come ebay, insomma)
+  b) ∀ venditore, quanti oggetti? MOLTI
+     Relazione: UNO A MOLTI

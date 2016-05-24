@@ -1,0 +1,295 @@
+/* In questo file .css definisco tutti gli elementi che devono avere
+ * lo stesso stile in tutto il sito web */
+  
+  
+body {
+	background-image: url("Images/pattern.jpg"); 
+	background-color: #E1E5FF; /*Ricaricando la pagina si vedeva bianco prima che caricasse l'immagine, così ho messo un colore simile a quello del pattern*/
+	line-height: 1.4; /*Maggiore leggibilità..*/
+	color:#262626;
+	font-family: Tahoma, sans-serif;
+}
+
+/*Insieme di regole per rendere il layout responsive*/
+@media screen and (max-width: 1200px) {
+   body{
+       font-size: 95%;
+    }   
+
+    div#page{
+    	min-width: 70%;
+    	position: relative;
+    	left: 5%;
+    }
+
+    nav#navbar{
+    	position: relative;
+    	left: 5%;
+    	min-width: 75%;
+    }
+
+    nav#faq{
+    	max-width: 15%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+   body{	
+       font-size: 80%;
+   }
+
+   nav#faq {
+   	display: none;
+   }
+
+   div#page{
+   	position: relative;
+   	left:0;
+   	min-width: 80%;
+   }
+
+   nav#navbar{
+   	position: relative;
+   	left: 0;
+   	min-width: 80%;
+   }
+}
+
+/*Il box delle faq di descrizione.html*/
+nav#faq{
+	border:1px solid darkcyan;
+	width: 20%;
+	position: relative;
+	top: 10em;
+	line-height: 2;	
+	float: left;
+	background-color: #ecedff;
+}
+
+nav#faq h2{
+	text-align: center;
+	font-style: normal;
+}
+
+nav#faq ul{
+	text-align: center;
+	padding:2.5%; 
+	padding-bottom: 1%;
+}
+
+/*La navbar presente in tutte le pagine*/
+nav#navbar {
+	border:black 1px solid;
+	background-color: teal;
+	width: 60%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+ }
+ 
+ nav#navbar li{
+ 	font-size: 1.2em;	
+ 	text-transform: uppercase;
+ 	display: inline;
+ 	margin-right: 7.5%;
+ }
+
+ nav#navbar a{
+		color: #EEEEEE;
+ }
+
+ nav#navbar a:hover{
+ 	text-shadow: -2px 2px black;
+ }
+
+
+/*nb: div#page contiene la colonna principale, quella con il content*/
+div#page{
+	background-color: #ecedff;
+	/*Definisco le dimensioni per il box della pagina lo centro*/
+	width: 50%;
+	margin: 1% auto 2% auto;
+	border: 2px solid darkcyan;
+	border-radius: 30px;
+	padding: 2%;
+}
+
+h1#secondH1{
+    margin-top: 7%;
+}
+
+h2,h3 {
+    font-style: oblique;
+    font-family: "Times new Roman", serif;
+    color:#004d80;
+}
+
+h3::first-letter{
+	font-size: 1.5em;
+}
+
+h1{
+	font-size: 1.75em;
+	color: #1D8E89;
+
+	font-style:normal;
+	text-transform: uppercase;
+	text-shadow: -2px 2px  #FFFFFF;
+	text-align: right;
+}
+
+a:link, a:visited{
+	color: #0086b3;
+	text-decoration: none;
+}
+
+ a:hover{
+	color: #3AA595;
+}
+
+ul li{
+	list-style: none;
+}
+
+p.error{
+    color:red;
+    text-align: center;
+}
+
+/*centro la tabella rispetto al box in cui risiede*/
+table {
+	margin:auto;
+	border-collapse: collapse;
+	width: 90%;
+	table-layout: fixed;
+}
+
+
+/*rendo responsive le immagini, così si rimpiccioliscono al diminuire della risoluzione*/
+table img{
+	width: 100%;
+	height: auto;
+}
+
+ table  td {
+	text-align: center;
+	padding: 5px;
+	border: 1px solid darkcyan;
+	min-width: 10%;
+	max-width: 10%;	
+}
+
+table td.descrizione{
+    text-align: left;
+}
+
+
+/*coloro gli elementi della tabella differentemente se sono pari o dispari*/ 
+tr:nth-child(odd) {
+	background: #c7eae7;
+	}
+tr:nth-child(even) {
+	background-color: #E1E5FF;
+}
+
+/*Definisco lo stile per l'intestazione della tabella*/
+table th{
+	text-align: center;
+	border-width: 1px;
+	border-style:solid;
+	border-color: black ;
+	background-color: darkcyan;
+	padding:10px;
+}
+
+
+div#vendita{
+	margin: 4% auto 1% auto;
+}
+
+/*Voglio che i campi di input e le label siano nella stessa riga*/
+div#vendita label {
+	padding: 0.5%;
+  	clear:both;
+  	display: inline-block;
+}
+
+
+div#vendita button{
+	width: 25%; 
+	background-color: #3AA595;
+	color: white;
+	text-transform: uppercase;
+	border: 1px solid black;
+	margin-left: 30%; 
+	margin-bottom: 1%;
+}
+
+
+div#vendita input, div#vendita textarea{
+	margin-left: 0.5%;
+	margin-top: -0.5%; /*voglio che ci sia poco spazio tra le label e i relativi input*/
+}
+
+ 
+ input, textarea{	
+	color: #0086b3;
+	background-color: #f2f2f2;
+	border: 1px #4d4d4d solid;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	padding: 0.5% 1% 0.5% 1%; 
+	display:block;	
+	max-width: 60%; /*accorgimento usato soprattutto per textarea, che sformava la pagina ridimensionando*/
+}
+
+input:focus, textarea:focus{
+	background-color: #e5e5e5;
+}
+
+div#login {
+	margin: 7% auto 10% auto;
+	padding: 1%;
+	width: 60%;
+	border: 1px solid black;	
+}
+
+div#login label {
+	padding: 1%; 
+	float:left;
+	width: 25%;
+	display: block;
+	clear:both;
+}
+
+/*proprietà condivise tra gli elementi di input del box login*/
+div#login input, div#login button {
+	padding: 1%; 
+	width: 50%;
+	margin-left: 30%; 
+}
+
+/*Proprietà esclusive del bottone*/
+div#login button{
+	width: 52%; /* è 52% perché mentre i campi di input si allargano con il padding left e right, il bottone non si allarga*/
+	background-color: #3AA595;
+	color: white	;
+	text-transform: uppercase;
+	border: 1px solid black;
+}
+
+div#login button:hover, div#vendita button:hover, div#acquisto button:hover{
+	background-color: #287166;
+}
+
+
+ div#acquisto button{
+    margin-left: 32%;
+    margin-top:2%;
+    width: 30%;
+    background-color: #3AA595;
+    color: white;
+    text-transform: uppercase;
+    border: 1px solid black;
+
+}
