@@ -4,13 +4,13 @@ VENDITORE
     id
     username
     psw
-    Saldo
+    saldo_id
 
 ACQUIRENTE
     id
     user
     psw
-    Saldo
+    saldo_id
 
 OBJECTSALE
     id
@@ -20,6 +20,7 @@ OBJECTSALE
     description
     price
     category
+    venditore_id
 
 SALDO
     id
