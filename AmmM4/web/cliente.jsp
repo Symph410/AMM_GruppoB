@@ -14,6 +14,8 @@
         <meta name="author" content="Stefano Corda">
         <meta name="description" content="Pagina dove è possibile fare acquisti">
         <link rel="stylesheet" type="text/css" href="DatiStatici/style.css">
+        <script type="text/javascript" src="js/jquery-2.2.4.js"></script>
+        <script type="text/javascript" src="js/filterItems.js"></script>
     </head>
 
 
@@ -38,8 +40,13 @@
                 <p class="error"> Operazione non riuscita: fondo insufficiente </p>
             </c:if>
 
+
             <p> Il tuo conto è di ${Math.floor(Utente.conto.getConto())}E<p>
-            <table>
+
+                <label for="filtra_obj" id="filtra"  > </label>
+                <input type="text" id="filtra_obj" name="filtra_obj" placeholder="Cerca...">
+
+            <table id="tabItems">
                 <tr>
                     <th>Nome </th>
                     <th>Immagine </th>
@@ -47,6 +54,7 @@
                     <th>Quantità disponibile</th>
                     <th>Prezzo</th>
                 </tr>
+                
                 <c:forEach var="obj" items="${obj}">
                     <tr>   
                         <td> ${obj.getName()} </td>

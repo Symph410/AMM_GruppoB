@@ -293,3 +293,7 @@ div#login button:hover, div#vendita button:hover, div#acquisto button:hover{
     border: 1px solid black;
 
 }
+
+#filtra_obj{
+    margin-left: 70%;
+}

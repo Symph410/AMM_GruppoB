@@ -8,6 +8,7 @@ package Amm.model.Classes;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.*;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +24,8 @@ public class ObjectSaleFactory {
     private Connection conn;
     private Integer loggedSellerId; //utile per transazione nel database
 
-    private ObjectSaleFactory() {}
+    private ObjectSaleFactory() {
+    }
 
     synchronized public static ObjectSaleFactory singleton() {
         if (instance == null) {
@@ -32,9 +34,9 @@ public class ObjectSaleFactory {
 
         return instance;
     }
-    
+
     public ObjectSale getObjectSaleById(Integer id) {
-        for (ObjectSale L : myList  ) {
+        for (ObjectSale L : myList) {
             if (L.getId().equals(id)) {
                 return L;
             }
@@ -42,15 +44,15 @@ public class ObjectSaleFactory {
 
         return null;
     }
-    
+
     //funzione comoda per ritornare tutti gli oggetti attualmente in vendita
-    public List<ObjectSale> getSellingObjectList() {
+    public ArrayList<ObjectSale> getSellingObjectList() {
         try {
-            ArrayList<ObjectSale> objSellingList =new ArrayList<>();
+            ArrayList<ObjectSale> objSellingList = new ArrayList<>();
             conn = DriverManager.getConnection(connectionString, "sym410", "pswbella");
             Statement stmtItems = conn.createStatement();
             String query = "select * from OBJECTSALE";
-           
+
             ResultSet itemSet = stmtItems.executeQuery(query);
 
             while (itemSet.next()) {
@@ -64,16 +66,16 @@ public class ObjectSaleFactory {
                 ob.setCategory(itemSet.getString("category"));
                 objSellingList.add(ob);
             }
-            
+
             stmtItems.close();
             conn.close();
-            
+
             return objSellingList;
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(UtenteFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return null;
     }
 
@@ -102,7 +104,7 @@ public class ObjectSaleFactory {
     public void setConnectionString(String connectionString) {
         this.connectionString = connectionString;
     }
-    
+
     //inserisco tutti gli oggetti presenti nel DB nella mia lista
     public void inizializzaDati() {
         try {
@@ -137,7 +139,7 @@ public class ObjectSaleFactory {
             conn = DriverManager.getConnection(connectionString, "sym410", "pswbella");
             PreparedStatement stmtInsert = conn.prepareStatement("insert into objectsale (id, nome, url, quantity, description, price, category, venditore_id) "
                     + " VALUES (default, ?, ?, ?, ?, ?, ?, ?)");
-            
+
             stmtInsert.setString(1, ob.getName());
             stmtInsert.setString(2, ob.getUrl());
             stmtInsert.setInt(3, ob.getQuantity());
@@ -147,14 +149,13 @@ public class ObjectSaleFactory {
             stmtInsert.setInt(7, loggedSellerId);
 
             int rows = stmtInsert.executeUpdate();
-            myList=getSellingObjectList();
+            myList = getSellingObjectList();
             if (rows != 1) {
                 throw new UpdateFallitoException();
             }
 
             stmtInsert.close();
             conn.close();
-
 
         } catch (SQLException ex) {
             Logger.getLogger(ObjectSaleFactory.class.getName()).log(Level.SEVERE, null, ex);
@@ -166,7 +167,6 @@ public class ObjectSaleFactory {
             conn = DriverManager.getConnection(connectionString, "sym410", "pswbella");
             PreparedStatement stmtUpdate = conn.prepareStatement("update OBJECTSALE set id = ?, nome= ?, url=?, quantity=?, description=?, price=?, category=?"
                     + " WHERE id = ?");
-            
 
             stmtUpdate.setInt(1, ob.getId());
             stmtUpdate.setString(2, ob.getName());
@@ -176,9 +176,9 @@ public class ObjectSaleFactory {
             stmtUpdate.setDouble(6, ob.getPrice());
             stmtUpdate.setString(7, ob.getCategory());
             stmtUpdate.setInt(8, ob.getId());
-            
+
             int rows = stmtUpdate.executeUpdate();
-            myList= getSellingObjectList();
+            myList = getSellingObjectList();
 
             if (rows != 1) {
                 throw new UpdateFallitoException();
@@ -236,10 +236,10 @@ public class ObjectSaleFactory {
             PreparedStatement stmtAcquirente = connTransaction.prepareStatement(queryAcquirente);
             stmtAcquirente.setDouble(1, u.conto.getConto());
             stmtAcquirente.setInt(2, u.getId());
-            
-            if (stmtAcquirente.executeUpdate() != 1){ //se c'è un problema nel sottrarre soldi al cliente... rollback.
+
+            if (stmtAcquirente.executeUpdate() != 1) { //se c'è un problema nel sottrarre soldi al cliente... rollback.
                 ob.addQuantity(1);
-                connTransaction.rollback();   
+                connTransaction.rollback();
                 return false;
             }
             //aggiungo i soldi al conto del venditore
@@ -268,7 +268,7 @@ public class ObjectSaleFactory {
             transaction.setDouble(1, currSeller.conto.getConto());
             transaction.setInt(2, venditoreId);
 
-            if(transaction.executeUpdate() != 1){  
+            if (transaction.executeUpdate() != 1) {
                 ob.addQuantity(1);
                 connTransaction.rollback();
                 return false;
@@ -288,7 +288,7 @@ public class ObjectSaleFactory {
         }
         return false;
     }
-    
+
     //ritorna la lista degli oggetti in vendita del venditore attualmente loggato come tale
     public ArrayList<ObjectSale> getSellerItems() {
         try {
@@ -318,6 +318,63 @@ public class ObjectSaleFactory {
         }
 
         return null;
+    }
+
+    public TreeSet<ObjectSale> searchForDescAndName(String query) {
+        //NOTA: sto utilizzando un treeset perché prima utilizzando un hashset non avevo ordinamento, e quindi
+        //nella creazione di tabelle dinamiche con js i miei oggetti venivano listati in maniera random ogni volta
+        //che veniva creata una nuova tabella con js ed era brutto da vedere
+        if (query.isEmpty()) {
+            TreeSet<ObjectSale> myTreeSet = new TreeSet<>((a, b) -> a.getId().compareTo(b.getId()));
+
+            for (ObjectSale ob : getSellingObjectList()) {
+                myTreeSet.add(ob);
+            }
+            return myTreeSet;
+        }
+
+        String[] subStrProdsDesc;
+        String[] subStrProdsName;
+        TreeSet<ObjectSale> queryTreeSet = new TreeSet<>((a, b) -> a.getId().compareTo(b.getId()));
+        String[] subStrQuery = query.toLowerCase().split(" ");
+        int counterDescription = 0;
+        int counterName = 0;
+        ArrayList<ObjectSale> sellingItems = getSellingObjectList();
+
+        for (int i = 0; i < sellingItems.size(); i++) {
+            subStrProdsDesc = sellingItems.get(i).getDescription().toLowerCase().split(" ");
+            subStrProdsName = sellingItems.get(i).getName().toLowerCase().split(" ");
+            counterDescription=0;
+            counterName=0;
+            int confronto;
+            if (subStrProdsDesc.length > subStrProdsName.length) {
+                confronto = subStrProdsDesc.length;
+            } else {
+                confronto = subStrProdsName.length;
+            }
+            for (int j = 0; j < subStrQuery.length; j++) {
+                for (int k = 0; k < confronto; k++) {
+                    if (k < subStrProdsDesc.length && subStrProdsDesc[k].equals(subStrQuery[j])) {
+                        counterDescription++;
+                    }
+                    if (counterDescription == subStrQuery.length) {
+                        queryTreeSet.add(sellingItems.get(i));
+                        counterDescription = 0;
+                    }
+                    if (k < subStrProdsName.length && subStrProdsName[k].equals(subStrQuery[j])) {
+                        counterName++;
+                    }
+                    if (counterName == subStrQuery.length) {
+                        queryTreeSet.add(sellingItems.get(i));
+                        counterName = 0;
+                    }
+                    
+                }
+            }
+        }
+
+        return queryTreeSet;
+
     }
 
 }

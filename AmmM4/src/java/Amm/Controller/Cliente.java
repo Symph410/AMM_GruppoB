@@ -41,7 +41,7 @@ public class Cliente extends HttpServlet {
         if(session.getAttribute("loggedAs")!="buyer"){
             request.getRequestDispatcher("accessDenied.jsp").forward(request, response);
         }
-        
+                
         
         
         ObjectSaleFactory factory= ObjectSaleFactory.singleton();
